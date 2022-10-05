@@ -93,13 +93,13 @@
 .main_box .img_box {
   width: 100%;
 }
-.main_box .filter_layout {
+.main_box .edit_layout {
   display: flex;
 }
-.main_box .submit_box .filter_box {
+.main_box .submit_box .edit_box {
   width: 100%;
   display: flex;
 }
-.main_box .submit_box .filter_box .filter_text {
+.main_box .submit_box .edit_box .edit_text {
   min-width: 80px;
 }

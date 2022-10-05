@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdFindInPage } from "react-icons/md";
 import Form from "react-bootstrap/Form";
-import { createFilterImage } from "../service-api";
+import { createEditImage } from "../service-api";
 
-const FilterImage = ({ showLoading, getTokenData }) => {
+const EditImage = ({ showLoading, getTokenData }) => {
   const urlRef = useRef(null);
   const [previewImg, setPreviewImg] = useState(null);
   const [resultImg, setResultImg] = useState(null);
-  const [filterData, setFilterData] = useState(null);
+  const [editData, setEditData] = useState(null);
   useEffect(() => {
-    if (!filterData) {
-      setFilterData({
+    if (!editData) {
+      setEditData({
         Saturation: 0,
         Contrast: 0,
         Highlights: 0,
@@ -22,22 +22,16 @@ const FilterImage = ({ showLoading, getTokenData }) => {
       const { value } = urlRef.current;
       const { adobeApiKey, adobeAuth, dropboxToken } = getTokenData();
       if (urlRef.current.value) {
-        createFilterImage(
-          value,
-          adobeApiKey,
-          adobeAuth,
-          dropboxToken,
-          filterData
-        )
+        createEditImage(value, adobeApiKey, adobeAuth, dropboxToken, editData)
           .then((res) => {
-            console.log("response - API : createFilterImage - res", res);
+            console.log("response - API : createEditImage - res", res);
             const link = res?.data?.result?.link ?? null;
             setResultImg(link);
             showLoading(false);
           })
           .catch((error) => {
             console.log(
-              "Error Response - API : createFilterImage - error",
+              "Error Response - API : createEditImage - error",
               error
             );
             showLoading(false);
@@ -45,7 +39,7 @@ const FilterImage = ({ showLoading, getTokenData }) => {
           });
       }
     }
-  }, [filterData]);
+  }, [editData]);
 
   /** 테스트링크 요청 */
   const getTestLink = () => {
@@ -60,12 +54,12 @@ const FilterImage = ({ showLoading, getTokenData }) => {
 
   /** 토큰 확인 */
   const handleUrlSubmit = (e) => {
-    const filterName = e.target.name;
-    const filterValue = e.target.value;
+    const editName = e.target.name;
+    const editValue = e.target.value;
 
     showLoading(true);
-    setFilterData((filterData) => {
-      return { ...filterData, [filterName]: Number(filterValue) };
+    setEditData((editData) => {
+      return { ...editData, [editName]: Number(editValue) };
     });
   };
 
@@ -76,14 +70,14 @@ const FilterImage = ({ showLoading, getTokenData }) => {
         <button onClick={getTestLink}>TEST LINK</button>
         <MdFindInPage onClick={showImg} className="icon_style" />
       </div>
-      <div className="filter_layout">
+      <div className="edit_layout">
         <div className="img_box">
           <img id="preview" src={resultImg ? resultImg : previewImg} />
         </div>
         {previewImg && (
           <div className="submit_box">
-            <div className="filter_box">
-              <Form.Label className="filter_text">Saturation</Form.Label>
+            <div className="edit_box">
+              <Form.Label className="edit_text">Saturation</Form.Label>
               <Form.Range
                 name="Saturation"
                 onClick={handleUrlSubmit}
@@ -91,8 +85,8 @@ const FilterImage = ({ showLoading, getTokenData }) => {
                 max={100}
               />
             </div>
-            <div className="filter_box">
-              <Form.Label className="filter_text">Contrast</Form.Label>
+            <div className="edit_box">
+              <Form.Label className="edit_text">Contrast</Form.Label>
               <Form.Range
                 name="Contrast"
                 onClick={handleUrlSubmit}
@@ -100,8 +94,8 @@ const FilterImage = ({ showLoading, getTokenData }) => {
                 max={100}
               />
             </div>
-            <div className="filter_box">
-              <Form.Label className="filter_text">Highlights</Form.Label>
+            <div className="edit_box">
+              <Form.Label className="edit_text">Highlights</Form.Label>
               <Form.Range
                 name="Highlights"
                 onClick={handleUrlSubmit}
@@ -109,8 +103,8 @@ const FilterImage = ({ showLoading, getTokenData }) => {
                 max={100}
               />
             </div>
-            <div className="filter_box">
-              <Form.Label className="filter_text">Shadows</Form.Label>
+            <div className="edit_box">
+              <Form.Label className="edit_text">Shadows</Form.Label>
               <Form.Range
                 name="Shadows"
                 onClick={handleUrlSubmit}
@@ -118,8 +112,8 @@ const FilterImage = ({ showLoading, getTokenData }) => {
                 max={100}
               />
             </div>
-            <div className="filter_box">
-              <Form.Label className="filter_text">Blacks</Form.Label>
+            <div className="edit_box">
+              <Form.Label className="edit_text">Blacks</Form.Label>
               <Form.Range
                 name="Blacks"
                 onClick={handleUrlSubmit}
@@ -127,8 +121,8 @@ const FilterImage = ({ showLoading, getTokenData }) => {
                 max={100}
               />
             </div>
-            <div className="filter_box">
-              <Form.Label className="filter_text">Texture</Form.Label>
+            <div className="edit_box">
+              <Form.Label className="edit_text">Texture</Form.Label>
               <Form.Range
                 name="Texture"
                 onClick={handleUrlSubmit}
@@ -144,4 +138,4 @@ const FilterImage = ({ showLoading, getTokenData }) => {
   );
 };
 
-export default FilterImage;
+export default EditImage;

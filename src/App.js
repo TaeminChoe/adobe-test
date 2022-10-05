@@ -3,7 +3,7 @@ import "./dist/custom.css";
 import logo from "./dist/logo.png";
 import React, { useRef, useState } from "react";
 import CutoutImage from "./components/CutoutImage";
-import FilterImage from "./components/FilterImage";
+import EditImage from "./components/EditImage";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,8 +18,8 @@ function App() {
       case "cutout":
         setOpenCategory("cutout");
         break;
-      case "filter":
-        setOpenCategory("filter");
+      case "edit":
+        setOpenCategory("edit");
         break;
     }
   };
@@ -79,17 +79,17 @@ function App() {
           </button>
           <button
             className="header_text"
-            name="filter"
+            name="edit"
             onClick={handleOpenCategory}
           >
-            FILTER
+            EDIT
           </button>
         </div>
         {openCategory == "cutout" && (
           <CutoutImage showLoading={showLoading} getTokenData={getTokenData} />
         )}
-        {openCategory == "filter" && (
-          <FilterImage getTokenData={getTokenData} showLoading={showLoading} />
+        {openCategory == "edit" && (
+          <EditImage getTokenData={getTokenData} showLoading={showLoading} />
         )}
       </div>
     </div>

@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const SERVER_URL = "https://web-part-manager.herokuapp.com";
 // const SERVER_URL = "http://localhost:9500";
-const SERVER_URL = "https://adobe-temm.herokuapp.com/";
+const SERVER_URL = "https://adobe-cutout-test.herokuapp.com";
 
 /** 사용자 조회 API 요청 */
 function getUserList() {
@@ -18,13 +18,13 @@ function getUserList() {
 //   });
 // }
 
-function createCutoutImage(value, adobeApiKey, adobeAuth, dropboxToken) {
+function createCutoutImage(value, adobe_api_key, adobe_auth, dropbox_token) {
   const url = `${SERVER_URL}/cutout`;
   const param = {
     url: value,
-    adobeApiKey,
-    adobeAuth,
-    dropboxToken,
+    adobe_api_key,
+    adobe_auth,
+    dropbox_token,
   };
   console.log("Request-API : createCutoutImage - url ", url);
   console.log("Request-API : createCutoutImage - param ", param);
@@ -32,25 +32,25 @@ function createCutoutImage(value, adobeApiKey, adobeAuth, dropboxToken) {
   return axios.post(url, param);
 }
 
-function createFilterImage(
+function createEditImage(
   value,
-  adobeApiKey,
-  adobeAuth,
-  dropboxToken,
+  adobe_api_key,
+  adobe_auth,
+  dropbox_token,
   options
 ) {
-  const url = `${SERVER_URL}/filter`;
+  const url = `${SERVER_URL}/edit`;
   const param = {
     url: value,
-    adobeApiKey,
-    adobeAuth,
-    dropboxToken,
+    adobe_api_key,
+    adobe_auth,
+    dropbox_token,
     options,
   };
-  console.log("Request-API : createFilterImage - url ", url);
-  console.log("Request-API : createFilterImage - param ", param);
+  console.log("Request-API : createEditImage - url ", url);
+  console.log("Request-API : createEditImage - param ", param);
   console.log("api data", param);
   return axios.post(url, param);
 }
 
-export { getUserList, createCutoutImage, createFilterImage };
+export { getUserList, createCutoutImage, createEditImage };
