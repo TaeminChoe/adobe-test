@@ -1,0 +1,105 @@
+.loading_box {
+  width: 100%;
+  height: 120vh;
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.loading_box #loading {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+.loading_box .header_text {
+  color: white;
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.main_box {
+  display: flex;
+  flex-flow: column;
+  width: 80%;
+  height: 100%;
+  justify-content: flex-start;
+}
+.main_box div {
+  width: 100%;
+  align-items: center;
+  padding: 5px;
+}
+.main_box input {
+  border: none;
+  border-bottom: 1px solid grey;
+  padding: 10px;
+  margin: 2px;
+}
+.main_box button, .main_box a {
+  border: 1px solid grey;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+}
+.main_box button:hover, .main_box a:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
+}
+.main_box .adobe_logo {
+  width: 110px;
+  margin-top: 10px;
+}
+.main_box .header_text {
+  font-size: 1.5rem;
+  margin-top: 25px;
+  padding-top: 10px;
+}
+.main_box .icon_style {
+  font-size: 50px;
+  color: green;
+}
+.main_box .icon_style:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.2);
+}
+.main_box .token_box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.main_box .link_box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.main_box .link_box input {
+  width: 60%;
+}
+.main_box .link_box button {
+  width: 5%;
+}
+.main_box .img_box {
+  width: 100%;
+}
+.main_box .filter_layout {
+  display: flex;
+}
+.main_box .submit_box .filter_box {
+  width: 100%;
+  display: flex;
+}
+.main_box .submit_box .filter_box .filter_text {
+  min-width: 80px;
+}
