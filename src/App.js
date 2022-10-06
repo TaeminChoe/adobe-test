@@ -4,6 +4,7 @@ import logo from "./dist/logo.png";
 import React, { useRef, useState } from "react";
 import CutoutImage from "./components/CutoutImage";
 import EditImage from "./components/EditImage";
+import CropImage from "./components/CropImage";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,9 +22,13 @@ function App() {
       case "edit":
         setOpenCategory("edit");
         break;
+      case "crop":
+        setOpenCategory("crop");
+        break;
     }
   };
 
+  /**로딩 모달 제어 */
   const showLoading = (boolean) => {
     setIsLoading(boolean);
   };
@@ -84,12 +89,22 @@ function App() {
           >
             EDIT
           </button>
+          <button
+            className="header_text"
+            name="crop"
+            onClick={handleOpenCategory}
+          >
+            CROP
+          </button>
         </div>
-        {openCategory == "cutout" && (
+        {openCategory === "cutout" && (
           <CutoutImage showLoading={showLoading} getTokenData={getTokenData} />
         )}
-        {openCategory == "edit" && (
+        {openCategory === "edit" && (
           <EditImage getTokenData={getTokenData} showLoading={showLoading} />
+        )}
+        {openCategory === "crop" && (
+          <CropImage getTokenData={getTokenData} showLoading={showLoading} />
         )}
       </div>
     </div>

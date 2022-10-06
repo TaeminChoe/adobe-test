@@ -103,3 +103,20 @@
 .main_box .submit_box .edit_box .edit_text {
   min-width: 80px;
 }
+.main_box .submit_box .crop_box {
+  width: 90%;
+  display: flex;
+  justify-items: flex-start;
+  align-items: center;
+}
+.main_box .submit_box .crop_box Form {
+  width: 15%;
+}
+.main_box .submit_box .crop_box div {
+  width: 80px;
+}
+.main_box .submit_box .crop_box .input-box {
+  width: 150px;
+  margin: 0;
+  margin-right: 10px;
+}

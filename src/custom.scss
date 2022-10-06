@@ -105,6 +105,23 @@
         min-width: 80px;
       }
     }
+    .crop_box{
+      width: 90%;
+      display: flex;
+      justify-items: flex-start;
+      align-items: center;
+      Form{
+        width:15%;
+      }
+      div{
+        width: 80px;
+      }
+      .input-box{
+        width:150px;
+        margin: 0;
+        margin-right: 10px;
+      }
+    }
   }
 
 }

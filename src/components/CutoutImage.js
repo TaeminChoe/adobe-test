@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { MdFindInPage } from "react-icons/md";
-import { createCutoutImage } from "../service-api";
+import { checkImageStatus, createCutoutImage, getImage } from "../service-api";
 
 const CutoutImage = ({ showLoading, getTokenData }) => {
   const urlRef = useRef(null);
@@ -28,13 +28,26 @@ const CutoutImage = ({ showLoading, getTokenData }) => {
   /** Cutout API 요청 */
   const getCutoutImage = (value, adobe_api_key, adobe_auth, dropbox_token) => {
     showLoading(true);
-
     createCutoutImage(value, adobe_api_key, adobe_auth, dropbox_token)
       .then((res) => {
-        console.log("response - API : createCutoutImage - res", res);
-        const link = res?.data?.result?.link ?? null;
-        setResultImg(link);
-        showLoading(false);
+        const { filename, _links } = res.data;
+        const href = _links.self.href; // 업로드 상태 확인할 수있는 url
+        // setInterval을 사용하여 주기적으로 상태값 확인(running일 경우 대기)
+        checkImageStatus(href, adobe_api_key, adobe_auth)
+          .then((res) => {
+            if (res !== "succeeded") return false;
+            // 서버 적재가 완료 되었으므로 이미지 요청
+            getImage(filename).then((res) => {
+              // blob url 변환
+              const url = window.URL.createObjectURL(
+                new Blob([res.data], { type: res.headers["content-type"] })
+              );
+              setResultImg(url);
+            });
+          })
+          .finally(() => {
+            showLoading(false);
+          });
       })
       .catch((error) => {
         console.log("Error Response - API : createCutoutImage - error", error);

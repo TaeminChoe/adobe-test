@@ -8,6 +8,7 @@ const EditImage = ({ showLoading, getTokenData }) => {
   const [previewImg, setPreviewImg] = useState(null);
   const [resultImg, setResultImg] = useState(null);
   const [editData, setEditData] = useState(null);
+
   useEffect(() => {
     if (!editData) {
       setEditData({
